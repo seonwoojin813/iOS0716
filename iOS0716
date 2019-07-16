@@ -1,0 +1,86 @@
+import UIKit
+
+/*
+//운영체제 버전 확인
+print(UIDevice.current.systemVersion)
+
+//iOS 앱을 만들떄는 OSX를 iOS로 변경하면 됩니다.
+if #available(OSX 11.0, *){
+    print("OSX 11.0 이상에서 동작")
+}else{
+    print("OSX 11.0 미만에서 동작")
+}
+
+var n1 = Int("123") //문자열 123을 정수 123으로 변환
+var n2 = Int("u78s")//문자열 u78s를 정수로 변환 - 실패
+print(n1)
+print(n2)//정수 변환에 실패한 경우 예외가 발생하지 않고 nil
+*/
+
+/*
+//아래처럼 변수 선언을 할 수 가 없습니다.
+//swift에서는 Optional 타입이 아니면 nil을 저장할 수 없습니다.
+var su1 : Int = 10
+var su2 : Int? = nil
+su2 = 30
+ */
+
+//Optional 타입은 출력을 하게 되면 Optional이 붙어서 출력
+//print("su1:", su1)
+//print("su2:", su2)
+
+//Optional 타입은 연산에 사용할 수 없습니다.
+//var result : Int = su1 + su2 //연산을 사용할 수 없어서 에러
+
+//print(result)
+/*
+//Optional을 강제로 해제해서 사용
+print("su2:", su2!)
+var result : Int = su1 + su2!
+print("result:", result)
+*/
+/*
+//강제해제를 사용할 때 데이터가 nil이면 에러 발생
+su2 = nil
+print("su2:", su2!)
+result = su1 + su2!
+*/
+
+/*
+su2 = nil
+if su2 != nil{
+print("su2:", su2!)
+result = su1 + su2!
+}else{
+print("su2가 nil이라서 작업을 계속할 수 없습니다.")
+}
+*/
+/*
+su2 = nil
+//swift에서 if나 guard 구문에서 변수나 상수를 생성해서 값을 대입하는 문장을 만들면
+//nil이 아니면 true, nil이면 false가 됩니다. 이 방법을 비 강제 해제라고 합니다.
+if let imsi = su2{
+    print("su2:", imsi)
+    result = su1 + imsi
+}else{
+    print("su2가 nil이라서 작업을 계속할 수 없습니다.")
+}
+
+var su3 : Int? = 34
+//== 와 != 연산은 Optional을 해제하지 않아도 가능
+print(su3 == 34)
+
+//? 대신에 !를 이용해서 변수를 만들면 Optional을 해제하지 않아도
+//자동으로 해제해서 사용할 수 있도록 해줍니다.
+var su4 : Int! = 76
+print(su4 + 70)
+*/
+
+var obj : Any = 124 //Any는 모든 자료형의 데이터를 저장 가능
+print(obj) //출력은 데이터만 되기 때문에 자료형이 무엇인지 파악이 안됨
+var result = 24 + (obj as! Int)
+//Any 나 AnyObject를 사용할 때는 원래의 자료형으로 형변환해서 사용해야 합니다.
+print(result)
+
+
+
