@@ -78,7 +78,7 @@ func inc(n : inout Int){
  이건 오류 - 참조를 안해줘서
 */
 
-
+/*
 var x : Int = 10
 func inc(n : inout Int){
     n = n + 1
@@ -88,3 +88,63 @@ func inc(n : inout Int){
 //데이터를 변경할려고 하는 것
 inc(n : &x)
 print(x)
+
+//inc의 참조를 f에 대입
+var f = inc
+//함수 이름만 기재하면 함수의 참조를 출력
+print(inc)
+f(&x)
+print(x)
+
+
+//매개변수가 없는 클로저를 만들고 clo라는 변수에 대입
+var clo = {() -> (Void) in
+    print("매개변수가 없는 클로져")
+}
+
+clo()
+
+*/
+
+//이 함수는 매개변수가 없고 리턴 타입이 Void 함수를 리턴
+func f () -> (() -> Void) {
+    //함수 내부에서 만들어진 변수는 외부에서 호출이 불가능
+    var x = 10
+    return {() -> Void in x = x + 1
+        print(x)
+    }
+}
+
+var inner = f ()
+
+inner() //함수 내부의 데이터인 x가 변경
+inner() //함수 내부의 데이터인 x가 변경
+
+
+
+var ar = [30, 10, 50, 20]
+//리스트의 데이터를 오름차순 정렬해주는 메소드를 호출
+ar.sort()
+print(ar)
+//sort 라는 함수에 list의 데이터를 비교할 수 있는 함수를 대입해주면
+//원하는 형태로 정렬할 수 있습니다
+//함수의 모양은 매개변수로 정수 2개 return type은 Bool이어야 합니다.
+
+//일반 함수를 만들어서 대입
+func myfunc(n1 : Int, n2 : Int) -> Bool{
+    return n1 > n2
+}
+//함수 이름을 설정
+ar.sort(by:myfunc)
+print(ar)
+
+//클로저를 이용
+ar.sort(by:{(n1:Int, n2:Int) -> Bool in return n1>n2})
+print(ar)
+
+//trailinf closure 를 이용
+//함수가 마지막 매개변수인 경우는 함수를 () 바깥에 구현해도 됩니다.
+ar.sort(){(n1:Int, n2:Int) -> Bool in return n1>n2}
+print(ar)
+
+
