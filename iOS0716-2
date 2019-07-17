@@ -1,0 +1,119 @@
+import UIKit
+
+/*
+//구조체 만들기
+struct Student{
+    //구조체 안에 속성 생성
+    var name:String = ""
+    var num:Int = 0
+    var phone:String = ""
+    
+    //메소드
+    func toString() -> Void {
+        print("num:", num, "name:", name, "phone:", phone)
+        //문자열로 리턴 - 문자열 템플릿 이용
+        // "\(변수명)" : 변수의 값이 문자열에 포함
+        // string - return "번호:\(num) 이름:\(name) 전화번호:\(phone)"
+    }
+}
+
+//구조체의 인스턴스 생성
+var student1:Student = Student()
+//속성을 호출해서 설정하고 출력하는 메소드를 호출
+student1.num = 1
+student1.name="panda"
+student1.phone="010-1111-2222"
+student1.toString()
+
+//구조체는 생성할 때 값을 대입해서 생성이 가능
+var student2:Student = Student(name: "lion", num: 2, phone: "010-2222-3333")
+student2.toString()
+
+//구조체는 value Type이라서 다른 변수에 대입하면 복사를 해서 넘겨줍니다.
+// = 로 대입하면 내부 내용을 복사해서 새로 만든 후 대입합니다.
+//저장하고 있는 내용은 같지만 저장 위치가 다릅니다.
+var student3 = student2
+student2.num = 100
+student2.toString()
+student3.toString()
+*/
+
+/*
+//iOS 프레임워크에서 좌표,위치 및 사각영역을 나타내는 것들은 전부 구조체입니다.
+
+class Person{
+    var num : Int = 0
+    var name : String = ""
+    
+    func  toString() -> String {
+        return "num:\(num) name:\(name)"
+    }
+}
+
+//Person 클래스의 인스턴스 생성
+var person1 : Person = Person()
+person1.num = 1
+person1.name = "apple"
+print(person1.toString())
+
+//클래스의 인스턴스는 = 으로 대입하고 참조가 복사
+var person2 = person1
+//person1의 num을 수정
+person1.num = 2
+//person2의 내용을 출력해보면 numdl 2로 변경되어 있습니다.
+//person1과 person2는 동일한 데이터
+print(person2.toString())
+
+*/
+
+
+//계산으로 구해질 수 있는 속성은 저장 형태를 만들지 않고 연산의 형태로 구현
+class Inner{
+    init(){
+        print("Inner의 생성자")
+    }
+}
+
+
+//이름과 태어난 해, 나이를 저장흐는 클래스를 생성
+class Person{
+    static var seq : Int = 1
+    
+    init(){
+        num = Person.seq
+        Person.seq = Person.seq + 1
+    }
+    
+    //num은 인스턴스 변수 - 인스턴스가 각각 소유
+    var num : Int = 0
+    
+    //Inner의 인스턴스 생성
+    //앞에 lazy 가 없으면 인스턴스가 만들어질 때 바로 생성
+    //lazy를 붙이면 처음 사용될 때 생성
+    lazy var inner : Inner = Inner()
+    
+    //저장 프로퍼티 - 저장 공간을 별도로 갖는 프로퍼티
+    var name : String = ""
+    var birthyear : Int = 0
+    //var age : Int = 0
+    
+    //나이는 태어난 해를 알면 계산할 수 있습니다.
+    //계산을 구해질 수 있는 속성은 저장 형태를 만들지 말고 연산의 형태로 구현할 것을 권장
+    
+    var age : Int{
+        //연산 프로퍼티 - 저장 공간을 별도로 갖지 않고 필요할 때 연산을 해서 처리
+        get{
+            return 2019-birthyear
+        }
+    }
+}
+
+var person = Person()
+//Inner를 처음 사용하는 순간 inner 생성
+//print(person.inner)
+
+print(person.num)
+var person1 = Person()
+print(person1.num)
+
+
