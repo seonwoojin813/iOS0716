@@ -1,0 +1,64 @@
+import UIKit
+
+/*
+class Temp {
+    var x : Int = 0
+    
+    //static 메소드 안에서는 외부에 있는 일반 프로퍼티를 사용 못함
+    static func staticMethod(){
+        //print(x)
+    }
+    
+    //@ojdbc 는 Objective-C 호환 메소드로 만들어서 Selector에 대입할 수 있도록 합니다.
+    @objc func instanceMethod(){
+        
+        var x : Int = 7
+        //변수 'x'는 절대로 변이되지 않았다. 'let'을 상수로 바꾸는 것을 고려해보십시오
+        
+        //속성을 호출하면 가까운 곳에서 만든 것을 호출
+        print("x:",x)
+        
+        //self를 붙이게 되면 메소드 외부에서 찾음
+        print("self.x:", self.x)
+    }
+}
+
+
+//Temp.staticMethod()
+var temp:Temp = Temp()
+temp.instanceMethod()
+
+//타이머를 생성해서 시작
+var timer : Timer = Timer.scheduledTimer(timeInterval: 3,
+                                         target: temp,
+                                         selector: #selector(Temp.instanceMethod),
+                                         userInfo: nil, repeats: true)
+
+*/
+
+ class Temp {
+ //생성자
+ init(){
+ print("생성자")
+ }
+ //소멸자
+ deinit {
+ print("소멸자")
+ }
+ }
+ 
+ //생성자를 호출해서 인스턴스를 생성하고 그 참조를 temp에 대입
+ //var temp = Temp()
+ 
+ //참조 카운트를 1로 해서 생성
+ var temp : Temp? = Temp()
+ //참조카운트를 1감소시켜 줍니다.
+ temp = nil
+ //참조카운트가 0이 되면 인스턴스는 소멸되고 소멸자가 호출
+ 
+ temp = Temp()
+ var temp1 = temp
+ //대입하면 참조카운트가 1 증가 합니다.
+ temp = nil
+ temp1 = nil
+
